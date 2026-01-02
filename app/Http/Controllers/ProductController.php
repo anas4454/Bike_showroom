@@ -13,54 +13,38 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('web-pages.home');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function allProducts()
     {
-        //
+        $products = Product::all();
+        return view('web-pages.all-products', compact('products'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreProductRequest $request)
+
+
+    public function singleProduct(Product $product)
     {
-        //
+        return view('web-pages.single-product', compact('product'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
+    public function cart()
     {
-        //
+        return view('web-pages.cart');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Product $product)
+    public function checkout()
     {
-        //
+        return view('web-pages.checkout');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function account()
     {
-        //
+        return view('web-pages.account');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Product $product)
-    {
-        //
-    }
 }

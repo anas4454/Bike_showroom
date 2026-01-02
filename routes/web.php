@@ -1,11 +1,21 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ProductController::class , 'index'])->name('home');
+Route::get('/allproducts', [ProductController::class , 'allProducts'])->name('allproducts');
+Route::get('/bike/{product:slug}', [ProductController::class , 'singleProduct'])->name('singleproduct');
+Route::get('/cart', [ProductController::class , 'cart'])->name('cart');
+Route::get('/checkout', [ProductController::class , 'checkout'])->name('checkout');
+Route::get('/account', [ProductController::class , 'account'])->name('account');
+Route::get('/category', [CategoryController::class , 'index'])->name('category');
+Route::get('/collection', [CollectionController::class , 'collection'])->name('collection');
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

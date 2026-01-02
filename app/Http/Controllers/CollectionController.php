@@ -11,9 +11,9 @@ class CollectionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function collection()
     {
-        //
+        return view('web-pages.collection');
     }
 
     /**
