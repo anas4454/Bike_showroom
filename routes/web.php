@@ -6,8 +6,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', [ProductController::class , 'index'])->name('home');
-Route::get('/allproducts', [ProductController::class , 'allProducts'])->name('allproducts');
+Route::get('/products', [ProductController::class , 'allProducts'])->name('products');
 Route::get('/bike/{product:slug}', [ProductController::class , 'singleProduct'])->name('singleproduct');
 Route::get('/cart', [ProductController::class , 'cart'])->name('cart');
 Route::get('/checkout', [ProductController::class , 'checkout'])->name('checkout');

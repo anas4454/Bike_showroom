@@ -50,21 +50,32 @@
                     <div class="row g-4">
 
                         <!-- Product 1 -->
-                        <div class="col-md-4">
-                            <div class="card shadow-sm border-0 h-100">
-                                <span class="badge bg-success position-absolute m-2">NEW</span>
-                                <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def"
-                                    class="card-img-top" style="height:220px; object-fit:cover;" alt="Yamaha Bike">
-                                <div class="card-body">
-                                    <h6 class="fw-bold">Yamaha MT 15</h6>
-                                    <p class="small text-muted mb-1">Category: Sports Bike</p>
-                                    <p class="fw-bold text-warning">$1,600</p>
-                                    <a href="#" class="btn btn-outline-dark btn-sm w-100">View Details</a>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Product 2 -->
+                        @if ($products->isNotEmpty())
+
+                            @foreach ($products as $item)
+                                <div class="col-md-4">
+                                    <div class="card shadow-sm border-0 h-100">
+                                        <span
+                                            class="badge  @if ($item->condition == 'used') bg-danger @else bg-success @endif position-absolute m-2">
+                                            {{ $item->condition }}</span>
+                                        <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def"
+                                            class="card-img-top" style="height:220px; object-fit:cover;"
+                                            alt="Yamaha Bike">
+                                        <div class="card-body">
+                                            <h6 class="fw-bold"> {{ $item->brand }} {{ $item->model_name }}</h6>
+                                            <p class="small text-muted mb-1">Category: {{ $item->category->name }}</p>
+                                            <p class="fw-bold text-warning">${{ $item->new_price }}</p>
+                                            <a href="{{ route('singleproduct', $item->slug) }}"
+                                                class="btn btn-outline-dark btn-sm w-100">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                        @endif
+
+                        {{-- <!-- Product 2 -->
                         <div class="col-md-4">
                             <div class="card shadow-sm border-0 h-100">
                                 <span class="badge bg-warning text-dark position-absolute m-2">USED</span>
@@ -137,7 +148,7 @@
                                     <a href="#" class="btn btn-outline-dark btn-sm w-100">View Details</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>

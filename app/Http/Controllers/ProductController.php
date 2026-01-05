@@ -44,7 +44,7 @@ class ProductController extends Controller
 
     public function account()
     {
-        return view('web-pages.account');
+        return view('web-pages.user-account');
     }
 
 }

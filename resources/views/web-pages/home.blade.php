@@ -6,7 +6,7 @@
                 <div class="col-md-6">
                     <h1 class="fw-bold display-5">New & Used Bikes Marketplace</h1>
                     <p class="text-light">Buy & sell premium bikes with verified quality</p>
-                    <a class="btn btn-warning btn-lg">Shop Now</a>
+                    <a class="btn btn-warning btn-lg" href="{{ route('products') }}">Shop Now</a>
                 </div>
                 <div class="col-md-6 text-center">
                     <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmlrZXxlbnwwfHwwfHx8MA%3D%3D"
@@ -20,7 +20,7 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h3 class="fw-bold">Top Collections</h3>
-                <a href="#" class="btn btn-outline-dark btn-sm">View All</a>
+                <a href="{{ route('collection') }}" class="btn btn-outline-dark btn-sm">View All</a>
             </div>
 
             <div class="row g-4">
