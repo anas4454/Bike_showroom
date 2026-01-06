@@ -1,4 +1,4 @@
-<!-- Collection edit design (plain HTML placeholders + embedded CSS) -->
+<!-- Collection create design (plain HTML placeholders + embedded CSS matching other pages) -->
 <x-dashboard-layout.main>
 
 <style>
@@ -22,8 +22,8 @@
 
 	<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
 		<div>
-			<h2>Edit Collection</h2>
-			<p class="text-muted">Update collection details</p>
+			<h2>Create Collection</h2>
+			<p class="text-muted">Add a new collection to group products</p>
 		</div>
 		<div>
 			<a href="{{ route('dashboard.collection.index') }}" class="btn btn-outline-secondary">Back</a>
@@ -36,17 +36,17 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="form-label">Title</label>
-					<input class="form-control" name="title" value="Summer Specials" />
+					<input class="form-control" name="title" placeholder="Collection title" />
 				</div>
 
 				<div class="col-12">
 					<label class="form-label">Description</label>
-					<textarea class="form-control" name="description" rows="3">A curated selection of summer-ready bikes and gear.</textarea>
+					<textarea class="form-control" name="description" rows="3" placeholder="Short description"></textarea>
 				</div>
 
 				<div class="col-12 text-end" style="margin-top:12px">
 					<button type="button" class="btn btn-outline-secondary">Cancel</button>
-					<button type="submit" class="btn btn-warning">Save changes</button>
+					<button type="submit" class="btn btn-warning">Create collection</button>
 				</div>
 			</div>
 
@@ -54,5 +54,6 @@
 	</div>
 
 </div>
+
 
 </x-dashboard-layout.main>

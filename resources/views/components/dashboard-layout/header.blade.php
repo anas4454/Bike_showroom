@@ -1,25 +1,23 @@
-  <div class="admin-header d-flex justify-content-between align-items-center">
-            <!-- Left -->
-            <div class="header-left">
-                <h2 class="fw-bold mb-1">Dashboard</h2>
-                <p class="mb-0 text-muted">
-                    Overview & management of your Bike Mart store
-                </p>
+<header class="header">
+        <div>
+            <h2>Dashboard</h2>
+            <p>Store overview & performance</p>
+        </div>
+
+        <div class="header-right">
+            <div class="search">
+                <i class="bi bi-search"></i>
+                <input placeholder="Search..." />
             </div>
 
-            <!-- Right -->
-            <div class="header-right d-flex align-items-center gap-3">
-                <div class="header-actions d-flex gap-2">
-                    <button class="btn btn-light btn-sm">➕ Add Product</button>
-                    <button class="btn btn-outline-light btn-sm">View Store</button>
-                </div>
+            <button class="icon-btn"><i class="bi bi-bell"></i></button>
 
-                <div class="admin-profile d-flex align-items-center gap-2">
-                    <div class="admin-avatar">A</div>
-                    <div class="text-end">
-                        <div class="fw-semibold">Admin</div>
-                        <small class="text-muted">Administrator</small>
-                    </div>
+            <div class="profile">
+                <div class="avatar">A</div>
+                <div>
+                    <div style="font-size:12.5px;font-weight:600;">Admin</div>
+                    <div style="font-size:11px;color:#6B7280;">Administrator</div>
                 </div>
             </div>
         </div>
+    </header>
