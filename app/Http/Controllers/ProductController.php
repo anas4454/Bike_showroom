@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Mail\OrderConfirm;
+use Illuminate\Support\Facades\Mail;
 
 class ProductController extends Controller
 {
@@ -22,6 +24,7 @@ class ProductController extends Controller
     public function allProducts()
     {
         $products = Product::all();
+
         return view('web-pages.all-products', compact('products'));
     }
 
@@ -45,6 +48,13 @@ class ProductController extends Controller
     public function account()
     {
         return view('web-pages.user-account');
+    }
+
+    public function confirm_email(){
+
+        Mail::to('anasch14g@gmail.com')->send (new OrderConfirm());
+
+        return 'email sent';
     }
 
 }

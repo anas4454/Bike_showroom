@@ -23,7 +23,7 @@
 			<p class="text-muted">Manage product categories</p>
 		</div>
 		<div>
-			<a href="{{ route('dashboard.category.create') }}" class="btn btn-warning">Add Category</a>
+			<a href="{{ route('dashboard.categories.create') }}" class="btn btn-warning">Add Category</a>
 		</div>
 	</div>
 
@@ -41,9 +41,9 @@
 					<td>Sports</td>
 					<td>High performance and track-ready motorcycles</td>
 					<td class="text-end">
-						<a href="{{ route('dashboard.category.show') }}" class="btn btn-sm btn-outline-secondary">View</a>
-						<a href="{{ route('dashboard.category.edit') }}" class="btn btn-sm btn-outline-warning">Edit</a>
-						<a href="{{ route('dashboard.category.delete') }}" class="btn btn-sm btn-danger">Delete</a>
+						<a href="{{ route('dashboard.categories.show') }}" class="btn btn-sm btn-outline-secondary">View</a>
+						<a href="{{ route('dashboard.categories.edit') }}" class="btn btn-sm btn-outline-warning">Edit</a>
+						<a href="{{ route('dashboard.categories.delete') }}" class="btn btn-sm btn-danger">Delete</a>
 					</td>
 				</tr>
 				<tr>

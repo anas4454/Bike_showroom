@@ -23,10 +23,12 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $admin=[0,1]; // 0 for user and 1 for admin
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'role' =>$this->faker->randomElement($admin),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];

@@ -53,10 +53,12 @@
 
     <!-- Footer -->
     <div class="sidebar-footer">
-        <a href="#" class="logout-btn">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Logout</span>
-        </a>
+       <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="w-full text-center block px-2 py-1 text-sm text-red-600 border-0 bg-transparent">
+                                Logout->
+                            </button>
+                        </form>
     </div>
 
 </aside>

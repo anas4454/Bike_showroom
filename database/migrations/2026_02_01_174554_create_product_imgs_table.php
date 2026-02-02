@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('product_imgs', function (Blueprint $table) {
             $table->id();
-            $table->string("image_url");
-            $table->string("product_id");
-            $table->boolean("featured")->nullable();
+            $table->string('image_url');
+            $table->foreignId('product_id');
+            $table->boolean('featured')->default(false);
             $table->timestamps();
         });
     }

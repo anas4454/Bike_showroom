@@ -59,9 +59,17 @@
                                         <span
                                             class="badge  @if ($item->condition == 'used') bg-danger @else bg-success @endif position-absolute m-2">
                                             {{ $item->condition }}</span>
+
+                                            @if($item->images->count() < 1)
+
                                         <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def"
                                             class="card-img-top" style="height:220px; object-fit:cover;"
                                             alt="Yamaha Bike">
+                                        @else
+                                         <img src="{{ $item->images->first()->image_url }}"
+                                            class="card-img-top" style="height:220px; object-fit:cover;"
+                                            alt="Yamaha Bike">
+                                        @endif
                                         <div class="card-body">
                                             <h6 class="fw-bold"> {{ $item->brand }} {{ $item->model_name }}</h6>
                                             <p class="small text-muted mb-1">Category: {{ $item->category->name }}</p>

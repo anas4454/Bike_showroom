@@ -7,23 +7,42 @@
             <div class="row mb-5">
 
                 <!-- IMAGE GALLERY -->
-                <div class="col-lg-6">
-                    <div class="card shadow-sm border-0">
-                        <img src="https://images.unsplash.com/photo-1558981403-c5f9891b6b87" class="img-fluid rounded-top"
-                            style="height:420px; object-fit:cover;" alt="Bike Image">
-                    </div>
 
-                    <!-- Thumbnails -->
-                    <div class="d-flex gap-2 mt-3">
-                        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f" class="img-thumbnail"
-                            width="80">
-                        <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def" class="img-thumbnail"
+                @if ($product->images->count() < 1)
+
+
+                    <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def" class="card-img-top"
+                        style="height:220px; object-fit:cover;" alt="Yamaha Bike">
+                @else
+                    <div class="col-lg-6">
+                        <div class="card shadow-sm border-0">
+                            <img src="{{ $product->images->first()->image_url }}" class="img-fluid rounded-top"
+                                style="height:420px; object-fit:cover;" alt="Bike Image">
+                        </div>
+                        <!-- Thumbnails -->
+                        {{-- <div class="d-flex gap-2 mt-3">
+                            @foreach ($product->images as $item)
+                                <img src="{{ $item->image_url }}" class="img-thumbnail" width="80">
+                                {{-- <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def" class="img-thumbnail"
                             width="80">
                         <img src="https://images.unsplash.com/photo-1612197590870-2e5d9d4c0c35" class="img-thumbnail"
                             width="80">
-                    </div>
-                </div>
+                            @endforeach
+                        </div> --}}
 
+                        <div class="row g-2 mt-3">
+                            @foreach ($product->images as $item)
+                                <div class="col-auto">
+                                    <img src="{{ $item->image_url }}" class="img-thumbnail" width="80">
+                                </div>
+                            @endforeach
+                        </div>
+
+
+                    </div>
+
+
+                @endif
                 <!-- PRODUCT SUMMARY -->
                 <div class="col-lg-6">
                     <h2 class="fw-bold">{{ $product->name }}</h2>
@@ -34,7 +53,8 @@
                     <p class="fs-3 fw-bold text-warning">${{ $product->new_price }}</p>
                     <p class="text-muted text-decoration-line-through">${{ $product->old_price }}</p>
 
-                    <span class="badge @if ($product->condition == 'used') bg-danger @else bg-warning @endif text-dark mb-3">{{ $product->condition }}</span>
+                    <span
+                        class="badge @if ($product->condition == 'used') bg-danger @else bg-warning @endif text-dark mb-3">{{ $product->condition }}</span>
 
 
                     <p class="mt-3">

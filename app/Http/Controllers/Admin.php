@@ -65,4 +65,9 @@ class Admin extends Controller
         return view('dashboard.collection.show');
 }
 
+    public function userindex(){
+        return view('users.index');
+    }
+
+
 }

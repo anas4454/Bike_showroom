@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ProductImg;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class ProductImgSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        ProductImg::factory(1000)->create();
     }
 }

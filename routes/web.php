@@ -5,7 +5,12 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\Adminlogin;
+use App\Http\Middleware\Userlogin;
 use Illuminate\Support\Facades\Route;
+
+
+
 
 
 Route::get('/', [ProductController::class , 'index'])->name('home');
@@ -19,7 +24,7 @@ Route::get('/collection', [CollectionController::class , 'collection'])->name('c
 
 
 
-Route::middleware('auth' , 'verified')->prefix('dashboard')->group(function(){
+Route::middleware('auth' , 'verified' , Userlogin::class)->prefix('dashboard')->group(function(){
 
     // Dashboard route
     Route::get('/' , [Admin::class , 'index'])->name('dashboard');
@@ -44,8 +49,22 @@ Route::middleware('auth' , 'verified')->prefix('dashboard')->group(function(){
     Route::get('/collections/edit' , [Admin::class , 'editCollection'])->name('dashboard.collections.edit');
     Route::get('/collections/delete' , [Admin::class , 'deleteCollection'])->name('dashboard.collections.delete');
     Route::get('/collections/show' , [Admin::class , 'showCollection'])->name('dashboard.collections.show');
+
+
 });
 
+
+Route::middleware('auth' , 'verified' , Adminlogin::class)->prefix('users')->group(function(){
+
+    // User Dashboard route
+    Route::get('/' , [Admin::class , 'userindex'])->name('users.index');
+});
+
+
+//  Route::get('/user' , [Admin::class , 'userindex'])->name('users.index');
+
+
+Route::get('/confirmordermail' , [ProductController::class , 'confirm_email'])->name('confirm_email');
 
 
 Route::middleware('auth')->group(function () {
@@ -55,3 +74,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/site.php';
+
