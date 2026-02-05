@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class Admin extends Controller
 {
     public function index(){
+        // dd('admin dashboard');
         return view('dashboard.main');
     }
 

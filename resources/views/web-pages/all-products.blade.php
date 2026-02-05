@@ -71,7 +71,7 @@
                                             alt="Yamaha Bike">
                                         @endif
                                         <div class="card-body">
-                                            <h6 class="fw-bold"> {{ $item->brand }} {{ $item->model_name }}</h6>
+                                            <h6 class="fw-bold"> {{ $item->name }}</h6>
                                             <p class="small text-muted mb-1">Category: {{ $item->category->name }}</p>
                                             <p class="fw-bold text-warning">${{ $item->new_price }}</p>
                                             <a href="{{ route('singleproduct', $item->slug) }}"

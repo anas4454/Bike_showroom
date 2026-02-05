@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirm as MailOrderConfirm;
 use App\Models\Product;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
-use App\Mail\OrderConfirm;
+use App\Models\OrderConfirm;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ProductController extends Controller
@@ -40,21 +40,52 @@ class ProductController extends Controller
         return view('web-pages.cart');
     }
 
-    public function checkout()
+    public function checkout(Product $product)
     {
-        return view('web-pages.checkout');
+        // dd($product);
+        return view('web-pages.checkout' , compact('product'));
     }
+
+
+    public function confirm_email(){
+
+        Mail::to('anasch14g@gmail.com')->send (new MailOrderConfirm());
+
+        return 'email sent';
+    }
+
+    public function createorder(Request $request , Product $product){
+
+        $request->validate([
+            'name' => ['required' , 'string'] ,
+            'email' => ['required','email'],
+            'phone' => ['required','string'],
+            'city' => ['required','string'],
+            'address' => ['required','string'],
+        ]);
+//  dd($product);
+        OrderConfirm::create([
+            'oderid' => 'ORD'.time(),
+            'productId' => $product->id,
+            'total_price' => $product->new_price + ($product->new_price * 0.1 ),
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'city' => $request->city,
+            'address' => $request->address,
+            'payment_method' => 'cod',
+            'order_status' => 'pending',
+            'payment_status' => 'pending',
+        ]);
+
+        return view('web-pages.user-account');
+    }
+
+
+
 
     public function account()
     {
         return view('web-pages.user-account');
     }
-
-    public function confirm_email(){
-
-        Mail::to('anasch14g@gmail.com')->send (new OrderConfirm());
-
-        return 'email sent';
-    }
-
 }

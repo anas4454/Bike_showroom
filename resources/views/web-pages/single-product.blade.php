@@ -60,13 +60,13 @@
                     <p class="mt-3">
                         {{ $product->excerpt }}
                     </p>
-
+                    {{-- @dd($product); --}}
                     <div class="row g-2 mt-3">
                         <div class="col-md-6">
-                            <button class="btn btn-warning btn-lg w-100">Add to Cart</button>
+                          <a href="{{ route('cart') }}">  <button class="btn btn-warning btn-lg w-100">Add to Cart</button> </a>
                         </div>
                         <div class="col-md-6">
-                            <button class="btn btn-outline-dark btn-lg w-100">Buy Now</button>
+                           <a href="{{ route('checkout' , $product->slug ) }}"> <button class="btn btn-outline-dark btn-lg w-100">Buy Now</button> </a>
                         </div>
                     </div>
 
