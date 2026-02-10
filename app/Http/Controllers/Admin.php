@@ -2,73 +2,104 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\OrderConfirm;
 
 class Admin extends Controller
 {
-    public function index(){
+    public function index()
+    {
         // dd('admin dashboard');
         return view('dashboard.main');
     }
 
-    public function products(){
+    public function products()
+    {
         return view('dashboard.products.index');
     }
 
-    public function createProduct(){
+    public function createProduct()
+    {
         return view('dashboard.products.create');
     }
 
-    public function editProduct(){
+    public function editProduct()
+    {
         return view('dashboard.products.edit');
     }
 
-    public function deleteProduct(){
+    public function deleteProduct()
+    {
         return view('dashboard.products.delete');
     }
 
-    public function showProduct(){
+    public function showProduct()
+    {
         return view('dashboard.products.show');
     }
 
-    public function categories(){
+    public function categories()
+    {
         return view('dashboard.category.index');
     }
-     public function createCategory(){
+
+    public function createCategory()
+    {
         return view('dashboard.category.create');
     }
-    public function editCategory(){
+
+    public function editCategory()
+    {
         return view('dashboard.category.edit');
     }
 
-    public function deleteCategory(){
+    public function deleteCategory()
+    {
         return view('dashboard.category.delete');
     }
 
-    public function showCategory(){
+    public function showCategory()
+    {
         return view('dashboard.category.show');
     }
 
-    public function collection(){
+    public function collection()
+    {
         return view('dashboard.collection.index');
     }
 
-    public function createCollection(){
+    public function createCollection()
+    {
         return view('dashboard.collection.create');
     }
-    public function editCollection(){
+
+    public function editCollection()
+    {
         return view('dashboard.collection.edit');
     }
-    public function deleteCollection(){
+
+    public function deleteCollection()
+    {
         return view('dashboard.collection.delete');
     }
-    public function showCollection(){
-        return view('dashboard.collection.show');
-}
 
-    public function userindex(){
+    public function showCollection()
+    {
+        return view('dashboard.collection.show');
+    }
+
+    public function userindex()
+    {
         return view('users.index');
     }
 
+    public function adminOrderConfirm()
+    {
+        $orders = OrderConfirm::all();
+        return view('dashboard.orders.orders' , compact('orders'));
+    }
 
+    public function adminOrderdetail(OrderConfirm $order)
+    {
+        return view('dashboard.orders.orderdetail' , compact('order'));
+    }
 }

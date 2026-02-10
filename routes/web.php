@@ -37,6 +37,9 @@ Route::middleware('auth' , 'verified' , Userlogin::class)->prefix('dashboard')->
     Route::get('/collections/delete' , [Admin::class , 'deleteCollection'])->name('dashboard.collections.delete');
     Route::get('/collections/show' , [Admin::class , 'showCollection'])->name('dashboard.collections.show');
 
+    //order routes
+    Route::get('/orders' , [Admin::class , 'adminOrderConfirm'])->name('dashboard.orders');
+    Route::get('/orders/detail' , [Admin::class , 'adminOrderdetail'])->name('dashboard.orders.detail');
 
 });
 

@@ -25,6 +25,7 @@
                        <li class="nav-item"><a class="nav-link text-white"
                                href="{{ route('collection') }}">Collections</a></li>
                        <li class="nav-item"><a class="btn btn-warning px-4" href="{{ route('cart') }}">Cart</a></li>
+                       <li class="nav-item"><a class="btn btn-warning px-4" href="{{ route('login') }}">Login</a></li>
                    </ul>
                </div>
            </div>

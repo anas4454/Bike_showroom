@@ -34,7 +34,7 @@
             <span>Collections</span>
         </a>
 
-        <a href="#" class="nav-link">
+        <a href="{{ route('dashboard.orders') }}" class="nav-link">
             <i class="bi bi-receipt"></i>
             <span>Orders</span>
         </a>

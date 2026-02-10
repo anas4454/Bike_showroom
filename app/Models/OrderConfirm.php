@@ -23,4 +23,6 @@ class OrderConfirm extends Model
         'payment_status',
         'order_status',
     ];
+
+    
 }
