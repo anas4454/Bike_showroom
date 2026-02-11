@@ -73,7 +73,7 @@
 		</div>
 
 		<div>
-			<a href="{{ route('dashboard.products.index') }}" class="btn btn-outline-secondary">Back</a>
+			<a href="{{ route('dashboard.products') }}" class="btn btn-outline-secondary">Back</a>
 		</div>
 	</div>
 

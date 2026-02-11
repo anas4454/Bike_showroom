@@ -137,20 +137,25 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+
+                    @foreach ($products as $product)
+
+                    <tr>
 						<td style="width:64px">
-							<img src="/images/placeholder.png" alt="" class="img-fluid rounded" style="max-width:64px">
+							<img src="{{ $product->images->first()->image_url }}" alt="" class="img-fluid rounded" style="max-width:64px">
 						</td>
-						<td>Yamaha R6</td>
-						<td>Sports</td>
-						<td>$12,499.00</td>
+						<td>{{ $product->name }}</td>
+						<td>{{ $product->category->name }}</td>
+						<td>${{ number_format($product->new_price, 2) }}</td>
 						<td class="text-end">
-							<a href="{{ route('dashboard.products.show') }}" class="btn btn-sm btn-outline-secondary">View</a>
-							<a href="{{ route('dashboard.products.edit') }}" class="btn btn-sm btn-outline-warning">Edit</a>
-							<a href="{{ route('dashboard.products.delete') }}" class="btn btn-sm btn-danger">Delete</a>
+							<a href="{{ route('dashboard.products.show', $product) }}" class="btn btn-sm btn-outline-secondary">View</a>
+							<a href="{{ route('dashboard.products.edit', $product) }}" class="btn btn-sm btn-outline-warning">Edit</a>
+							<a href="{{ route('dashboard.products.delete', $product) }}" class="btn btn-sm btn-danger">Delete</a>
 						</td>
 					</tr>
-					<tr>
+                    @endforeach
+
+					{{-- <tr>
 						<td style="width:64px">
 							<img src="/images/placeholder.png" alt="" class="img-fluid rounded" style="max-width:64px">
 						</td>
@@ -162,7 +167,7 @@
 							<a href="#" class="btn btn-sm btn-outline-warning">Edit</a>
 							<a href="#" class="btn btn-sm btn-danger">Delete</a>
 						</td>
-					</tr>
+					</tr> --}}
 					<tr>
 						<td colspan="5" class="text-muted">End of sample rows.</td>
 					</tr>

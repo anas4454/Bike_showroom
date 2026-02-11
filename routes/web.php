@@ -21,7 +21,7 @@ Route::middleware('auth' , 'verified' , Userlogin::class)->prefix('dashboard')->
     Route::get('/products/create' , [Admin::class , 'createProduct'])->name('dashboard.products.create');
     Route::get('/products/edit' , [Admin::class , 'editProduct'])->name('dashboard.products.edit');
     Route::get('/products/delete' , [Admin::class , 'deleteProduct'])->name('dashboard.products.delete');
-    Route::get('/products/show' , [Admin::class , 'showProduct'])->name('dashboard.products.show');
+    Route::get('/products/show/{product}' , [Admin::class , 'showProduct'])->name('dashboard.products.show');
 
     //category routes
     Route::get('/categories' , [Admin::class , 'categories'])->name('dashboard.categories');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderConfirm;
+use App\Models\Product;
 
 class Admin extends Controller
 {
@@ -14,7 +15,8 @@ class Admin extends Controller
 
     public function products()
     {
-        return view('dashboard.products.index');
+        $products = Product::all();
+        return view('dashboard.products.index' , compact('products'));
     }
 
     public function createProduct()
@@ -32,9 +34,9 @@ class Admin extends Controller
         return view('dashboard.products.delete');
     }
 
-    public function showProduct()
+    public function showProduct(Product $product)
     {
-        return view('dashboard.products.show');
+        return view('dashboard.products.show', compact('product'));
     }
 
     public function categories()

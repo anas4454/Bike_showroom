@@ -108,16 +108,16 @@
         <div class="card-box">
             <div class="row g-4">
                 <div class="col-md-4">
-                    <img src="/images/placeholder.png" alt="Product image" class="img-fluid rounded w-100">
+                    <img src="{{ $product->images->first()->image_url }}" alt="Product image" class="img-fluid rounded w-100">
                 </div>
                 <div class="col-md-8">
-                    <h3>Yamaha R6</h3>
-                    <p class="text-muted">Sports • $12,499.00</p>
+                    <h3>{{ $product->name }}</h3>
+                    <p class="text-muted">{{ $product->category->name }} • ${{ number_format($product->new_price, 2) }}</p>
                     <p style="margin-top:12px">A high-performance sport bike with modern ergonomics and race-inspired
                         handling. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
                     <div class="mt-3">
-                        <a href="{{ route('dashboard.products.index') }}" class="btn btn-outline-secondary">Back to list</a>
+                        <a href="{{ route('dashboard.products') }}" class="btn btn-outline-secondary">Back to list</a>
                     </div>
                 </div>
             </div>

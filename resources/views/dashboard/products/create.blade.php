@@ -27,14 +27,14 @@
 			<p class="text-muted">Add a new product to your catalog</p>
 		</div>
 		<div>
-			<a href="{{ route('dashboard.products.index') }}" class="btn btn-outline-secondary">Back</a>
+			<a href="{{ route('dashboard.products') }}" class="btn btn-outline-secondary">Back</a>
 		</div>
 	</div>
 
 	<div class="card-box">
 		<!-- Plain HTML form placeholders; replace with Blade/logic as needed -->
 		<form action="#" method="POST" enctype="multipart/form-data">
-
+            @csrf
 			<div class="row">
 				<div class="col-md-6">
 					<label class="form-label">Name</label>
