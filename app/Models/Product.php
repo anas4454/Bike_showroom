@@ -17,4 +17,9 @@ class Product extends Model
     public function images(){
         return $this->hasMany(ProductImg::class , "product_id");
     }
+
+    public function orderConfirms(){
+        return $this->hasMany(OrderConfirm::class);
+    }
+    
 }

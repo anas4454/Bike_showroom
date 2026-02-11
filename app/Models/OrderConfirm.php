@@ -24,5 +24,8 @@ class OrderConfirm extends Model
         'order_status',
     ];
 
-    
+    public function product(){
+        return $this->belongsTo(Product::class , 'productId');
+    }
+
 }

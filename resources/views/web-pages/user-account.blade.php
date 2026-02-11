@@ -38,20 +38,20 @@
 
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <strong>Name:</strong> Anas Khan
+                                    <strong>Name:</strong> {{ $order->name }}
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <strong>Email:</strong> anas@example.com
+                                    <strong>Email:</strong> {{ $order->email }}
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <strong>Phone:</strong> +92 300 1234567
+                                    <strong>Phone:</strong> {{ $order->phone }}
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <strong>City:</strong> Karachi
+                                    <strong>City:</strong> {{ $order->city}}
                                 </div>
                                 <div class="col-12">
                                     <strong>Shipping Address:</strong><br>
-                                    House #12, Street 5, Gulshan-e-Iqbal, Karachi
+                                    {{ $order->address }}
                                 </div>
                             </div>
                         </div>
@@ -110,41 +110,29 @@
                                     </thead>
                                     <tbody>
 
+                                        @if($order)
                                         <tr>
-                                            <td>#ORD1023</td>
+                                            <td>{{ $order->oderid }}</td>
                                             <td>
                                                 <div class="d-flex align-items-center gap-2">
-                                                    <img src="https://images.unsplash.com/photo-1558981403-c5f9891b6b87"
+                                                    <img src="{{ optional($order->product->images->first())->image_url ?? 'https://via.placeholder.com/60' }}"
                                                         width="60" class="rounded">
-                                                    <span>Honda CB 150F</span>
+                                                    <span>{{ $order->product->name}}</span>
                                                 </div>
                                             </td>
-                                            <td>$950</td>
+                                            <td>${{ number_format($order->total_price, 2) }}</td>
                                             <td>
-                                                <span class="badge bg-warning text-dark">Shipped</span>
+                                                <span class="badge {{ $order->order_status === 'delivered' ? 'bg-success' : ($order->order_status === 'shipped' ? 'bg-warning text-dark' : 'bg-secondary text-light') }}">{{ ucfirst($order->order_status ?? 'pending') }}</span>
                                             </td>
                                             <td>
                                                 <a href="#" class="btn btn-outline-dark btn-sm">View</a>
                                             </td>
                                         </tr>
-
+                                        @else
                                         <tr>
-                                            <td>#ORD1024</td>
-                                            <td>
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <img src="https://images.unsplash.com/photo-1612197590870-2e5d9d4c0c35"
-                                                        width="60" class="rounded">
-                                                    <span>Yamaha MT 15</span>
-                                                </div>
-                                            </td>
-                                            <td>$1,600</td>
-                                            <td>
-                                                <span class="badge bg-success">Delivered</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-outline-dark btn-sm">View</a>
-                                            </td>
+                                            <td colspan="5" class="text-center text-muted">No orders found.</td>
                                         </tr>
+                                        @endif
 
                                     </tbody>
                                 </table>

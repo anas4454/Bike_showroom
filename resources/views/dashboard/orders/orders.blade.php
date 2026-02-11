@@ -61,10 +61,9 @@
 							</td>
 						</tr>
 
-						<tr>
-							<td colspan="10" class="text-muted">No orders found.</td>
-						</tr>
+
 						@endforeach
+                        
 					</tbody>
 				</table>
 			</div>

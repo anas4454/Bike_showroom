@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderConfirm as MailOrderConfirm;
-use App\Models\Product;
 use App\Models\OrderConfirm;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -28,11 +28,14 @@ class ProductController extends Controller
         return view('web-pages.all-products', compact('products'));
     }
 
-
-
     public function singleProduct(Product $product)
     {
         return view('web-pages.single-product', compact('product'));
+    }
+
+    public function account(OrderConfirm $order)
+    {
+        return view('web-pages.user-account', compact('order'));
     }
 
     public function cart()
@@ -43,31 +46,32 @@ class ProductController extends Controller
     public function checkout(Product $product)
     {
         // dd($product);
-        return view('web-pages.checkout' , compact('product'));
+        return view('web-pages.checkout', compact('product'));
     }
 
+    public function confirm_email()
+    {
 
-    public function confirm_email(){
-
-        Mail::to('anasch14g@gmail.com')->send (new MailOrderConfirm());
+        Mail::to('anasch14g@gmail.com')->send(new MailOrderConfirm);
 
         return 'email sent';
     }
 
-    public function createorder(Request $request , Product $product){
+    public function createorder(Request $request, Product $product)
+    {
 
         $request->validate([
-            'name' => ['required' , 'string'] ,
-            'email' => ['required','email'],
-            'phone' => ['required','string'],
-            'city' => ['required','string'],
-            'address' => ['required','string'],
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email'],
+            'phone' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'address' => ['required', 'string'],
         ]);
-//  dd($product);
-        OrderConfirm::create([
+        //  dd($product);
+        $order = OrderConfirm::create([
             'oderid' => 'ORD'.time(),
             'productId' => $product->id,
-            'total_price' => $product->new_price + ($product->new_price * 0.1 ),
+            'total_price' => $product->new_price + ($product->new_price * 0.1),
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -78,14 +82,6 @@ class ProductController extends Controller
             'payment_status' => 'pending',
         ]);
 
-        return view('web-pages.user-account');
-    }
-
-
-
-
-    public function account()
-    {
-        return view('web-pages.user-account');
+        return redirect()->route('account', $order);
     }
 }

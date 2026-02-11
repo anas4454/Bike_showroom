@@ -39,7 +39,7 @@ Route::middleware('auth' , 'verified' , Userlogin::class)->prefix('dashboard')->
 
     //order routes
     Route::get('/orders' , [Admin::class , 'adminOrderConfirm'])->name('dashboard.orders');
-    Route::get('/orders/detail' , [Admin::class , 'adminOrderdetail'])->name('dashboard.orders.detail');
+    Route::get('/orders/detail/{order}' , [Admin::class , 'adminOrderdetail'])->name('dashboard.orders.detail');
 
 });
 
