@@ -1,193 +1,125 @@
+<x-user-layout.main>
 
-<x-dashboard-layout.main>
+     <div class="main">
+        <header class="header">
+            <div class="header-left">
+                <h2>Dashboard</h2>
+                <p>Welcome back — view and manage your account</p>
+            </div>
+            <div class="header-right d-flex align-items-center">
+                <div class="me-3">
+                    <div
+                        style="background:#F1F5F9;padding:8px 12px;border-radius:10px;color:var(--muted);font-size:13px">
+                        Search</div>
+                </div>
+                <div class="d-flex align-items-center"
+                    style="gap:12px; padding-left:14px; border-left:1px solid var(--border)">
+                    <div
+                        style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#F59E0B,#FBBF24);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600">
+                        U</div>
+                </div>
+            </div>
+        </header>
 
-<style>
-	.overview {display:flex;gap:16px;margin-bottom:18px}
-	.overview .card{flex:1;padding:18px;border-radius:12px;background:#fff;border:1px solid #EEF2F7}
-	.overview .card h3{margin:0 0 6px;font-size:15px}
-	.overview .card p{margin:0;color:#6B7280;font-size:13px}
-	.section{margin-bottom:22px}
-	.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-	.btn{padding:.45rem .75rem;border-radius:8px;text-decoration:none;display:inline-block}
-	.btn-warning{background:#F59E0B;color:#fff;border:none}
-	.btn-outline-secondary{background:#fff;border:1px solid #E5E7EB;color:#111}
-	.table{width:100%;border-collapse:collapse}
-	.table th,.table td{padding:10px;border-bottom:1px solid #F1F5F9;text-align:left}
-	.text-muted{color:#6B7280}
-	.text-end{text-align:right}
-</style>
+        <main class="content">
+            <div class="row g-4">
+                <div class="col-12 col-md-8">
+                    <div class="card">
+                        <h5 style="margin-top:0; color:var(--muted); font-size:13px">Overview</h5>
+                        <h3 style="margin:6px 0 0;">Your activity</h3>
+                        <p style="color:var(--muted); margin-top:12px">This panel is intentionally left component-free —
+                            add your widgets here later.</p>
+                    </div>
+                </div>
 
-<div class="content">
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <h6 style="color:var(--muted); font-size:12px;margin:0">Account</h6>
+                        <div style="margin-top:14px; display:flex; gap:10px; align-items:center">
+                            <div
+                                style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#F59E0B,#FBBF24);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600">
+                                U</div>
+                            <div>
+                                <div style="font-weight:600">{{ auth()->user()->name ?? 'User' }}</div>
+                                <div style="color:var(--muted); font-size:13px">Member since
+                                    {{ auth()->user()->created_at?->format('M Y') ?? '-' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
 
-	<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-		<div>
-			<h2>User Dashboard</h2>
-			<p class="text-muted">Manage your products, categories and collections</p>
-		</div>
-	</div>
+        <div class="content">
 
-	<div class="overview">
-		<div class="card">
-			<h3>Add Product</h3>
-			<p>Create and manage your product listings.</p>
-			<div style="margin-top:12px">
-				<a href="{{ route('dashboard.products.create') }}" class="btn btn-warning">Add Product</a>
-			</div>
-		</div>
-		<div class="card">
-			<h3>Add Category</h3>
-			<p>Create categories to organize your products.</p>
-			<div style="margin-top:12px">
-				<a href="{{ route('dashboard.categories.create') }}" class="btn btn-outline-secondary">Add Category</a>
-			</div>
-		</div>
-		<div class="card">
-			<h3>Add Collection</h3>
-			<p>Group related products into collections.</p>
-			<div style="margin-top:12px">
-				<a href="{{ route('dashboard.collections.create') }}" class="btn btn-outline-secondary">Add Collection</a>
-			</div>
-		</div>
-	</div>
+            <div class="card-box mb-3">
+                <h6>Account</h6>
+                <h3>My Orders</h3>
+            </div>
 
-	<!-- Products list -->
-	<div class="section">
-		<div class="section-header">
-			<div>
-				<h3 style="margin:0">Products</h3>
-				<div class="text-muted">Your product listings</div>
-			</div>
-			<div>
-				<a href="{{ route('dashboard.products.create') }}" class="btn btn-warning">Add Product</a>
-			</div>
-		</div>
+            <div class="card-box">
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th scope="col">Order #</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Items</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($orders ?? [] as $order)
+                                <tr>
+                                    <td>#{{ $order->id }}</td>
+                                    <td>{{ optional($order->created_at)->format('Y-m-d') }}</td>
+                                    <td>{{ $order->items_count ?? ($order->products->count() ?? 0) }}</td>
+                                    <td>${{ number_format($order->total ?? 0, 2) }}</td>
+                                    <td>
+                                        @php
+                                            $status = $order->status ?? 'unknown';
+                                        @endphp
+                                        @if ($status === 'pending')
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        @elseif($status === 'processing')
+                                            <span class="badge bg-info text-dark">Processing</span>
+                                        @elseif($status === 'completed')
+                                            <span class="badge bg-success">Completed</span>
+                                        @elseif($status === 'cancelled')
+                                            <span class="badge bg-secondary">Cancelled</span>
+                                        @else
+                                            <span class="badge bg-light text-dark">{{ ucfirst($status) }}</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-end">
+                                        <a href="{{ route('orders.show', $order->id) }}"
+                                            class="btn btn-sm btn-outline-primary">View</a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">You have not placed any orders
+                                        yet.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-		<div class="card-box">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>Category</th>
-						<th>Price</th>
-						<th class="text-end">Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Roadster 300</td>
-						<td>Sports</td>
-						<td>$2,499</td>
-						<td class="text-end">
-							<a href="{{ route('dashboard.products.show') }}" class="btn btn-sm btn-outline-secondary">View</a>
-							<a href="{{ route('dashboard.products.edit') }}" class="btn btn-sm btn-outline-warning">Edit</a>
-							<a href="{{ route('dashboard.products.delete') }}" class="btn btn-sm btn-danger">Delete</a>
-						</td>
-					</tr>
-					<tr>
-						<td>Commuter Plus</td>
-						<td>Touring</td>
-						<td>$1,199</td>
-						<td class="text-end">
-							<a href="#" class="btn btn-sm btn-outline-secondary">View</a>
-							<a href="#" class="btn btn-sm btn-outline-warning">Edit</a>
-							<a href="#" class="btn btn-sm btn-danger">Delete</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+        </div>
 
-	<!-- Categories list -->
-	<div class="section">
-		<div class="section-header">
-			<div>
-				<h3 style="margin:0">Categories</h3>
-				<div class="text-muted">Manage product categories</div>
-			</div>
-			<div>
-				<a href="{{ route('dashboard.categories.create') }}" class="btn btn-warning">Add Category</a>
-			</div>
-		</div>
 
-		<div class="card-box">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Description</th>
-						<th class="text-end">Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Sports</td>
-						<td>High performance and track-ready motorcycles</td>
-						<td class="text-end">
-							<a href="{{ route('dashboard.categories.show') }}" class="btn btn-sm btn-outline-secondary">View</a>
-							<a href="{{ route('dashboard.categories.edit') }}" class="btn btn-sm btn-outline-warning">Edit</a>
-							<a href="{{ route('dashboard.categories.delete') }}" class="btn btn-sm btn-danger">Delete</a>
-						</td>
-					</tr>
-					<tr>
-						<td>Touring</td>
-						<td>Comfort-focused bikes for long distances</td>
-						<td class="text-end">
-							<a href="#" class="btn btn-sm btn-outline-secondary">View</a>
-							<a href="#" class="btn btn-sm btn-outline-warning">Edit</a>
-							<a href="#" class="btn btn-sm btn-danger">Delete</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
 
-	<!-- Collections list -->
-	<div class="section">
-		<div class="section-header">
-			<div>
-				<h3 style="margin:0">Collections</h3>
-				<div class="text-muted">Group your products into collections</div>
-			</div>
-			<div>
-				<a href="{{ route('dashboard.collections.create') }}" class="btn btn-warning">Add Collection</a>
-			</div>
-		</div>
 
-		<div class="card-box">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>Items</th>
-						<th class="text-end">Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Summer Specials</td>
-						<td>8</td>
-						<td class="text-end">
-							<a href="{{ route('dashboard.collections.show') }}" class="btn btn-sm btn-outline-secondary">View</a>
-							<a href="{{ route('dashboard.collections.edit') }}" class="btn btn-sm btn-outline-warning">Edit</a>
-							<a href="{{ route('dashboard.collections.delete') }}" class="btn btn-sm btn-danger">Delete</a>
-						</td>
-					</tr>
-					<tr>
-						<td>City Commuters</td>
-						<td>5</td>
-						<td class="text-end">
-							<a href="#" class="btn btn-sm btn-outline-secondary">View</a>
-							<a href="#" class="btn btn-sm btn-outline-warning">Edit</a>
-							<a href="#" class="btn btn-sm btn-danger">Delete</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+        <footer
+            style="height:48px;padding:0 24px;background:#fff;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;color:var(--muted);">
+            <div>© {{ date('Y') }} Bike Mart</div>
+            <div>Need help? <a href="#">Contact</a></div>
+        </footer>
+    </div>
 
-</div>
 
-</x-dashboard-layout.main>
+</x-user-layout.main>

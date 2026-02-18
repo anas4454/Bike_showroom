@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
             // dd(Auth::user()->role . " inside the if check");
         }
 
-        return redirect()->intended(route('user.index', absolute: false));
+        return redirect()->intended(route('users.index', absolute: false));
     }
 
     /**

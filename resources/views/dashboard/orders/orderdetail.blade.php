@@ -136,4 +136,50 @@
 
     </div>
 
+    <div class="col-12">
+        <div class="card-box mt-3">
+            <h6 class="mb-3">Update Order Status</h6>
+
+            <form action="{{ route('dashboard.orders.updateStatus', $order->id) }}" method="POST">
+                @csrf
+
+
+                <div class="row g-3">
+
+                    {{-- <div class="col-md-6">
+                    <label class="form-label">Payment Status</label>
+                    <select name="payment_status" class="form-select" required>
+                        <option value="pending" @if ($order->payment_status == 'pending') selected @endif>Pending</option>
+                        <option value="processing" @if ($order->payment_status == 'processing') selected @endif>Processing</option>
+                        <option value="completed" @if ($order->payment_status == 'completed') selected @endif>Completed</option>
+                        <option value="cancelled" @if ($order->payment_status == 'cancelled') selected @endif>Cancelled</option>
+                    </select>
+                </div> --}}
+
+                    <div class="col-md-6">
+                        <label class="form-label">Order Status</label>
+                        <select name="order_status" class="form-select" required>
+                            <option value="pending" @if ($order->order_status == 'pending') selected @endif>Pending</option>
+                            <option value="processing" @if ($order->order_status == 'processing') selected @endif>Processing
+                            </option>
+                            <option value="shipped" @if ($order->order_status == 'shipped') selected @endif>Shipped</option>
+                            <option value="delivered" @if ($order->order_status == 'delivered') selected @endif>Delivered
+                            </option>
+                            <option value="cancelled" @if ($order->order_status == 'cancelled') selected @endif>Cancelled
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary">
+                            Update Order
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
 </x-dashboard-layout.main>

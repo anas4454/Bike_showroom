@@ -28,4 +28,5 @@ class OrderConfirm extends Model
         return $this->belongsTo(Product::class , 'productId');
     }
 
+
 }

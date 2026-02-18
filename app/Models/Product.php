@@ -21,5 +21,7 @@ class Product extends Model
     public function orderConfirms(){
         return $this->hasMany(OrderConfirm::class);
     }
-    
+
+    protected $guarded = [];
+
 }

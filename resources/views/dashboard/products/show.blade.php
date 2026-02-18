@@ -108,14 +108,33 @@
         <div class="card-box">
             <div class="row g-4">
                 <div class="col-md-4">
-                    <img src="{{ $product->images->first()->image_url }}" alt="Product image" class="img-fluid rounded w-100">
+                    <img src="{{ $product->image ? asset('storage/' . $product->image) : ($product->images->first()->image_url ?? 'https://via.placeholder.com/300x200?text=No+Image') }}" alt="Product image" class="img-fluid rounded w-100">
                 </div>
                 <div class="col-md-8">
                     <h3>{{ $product->name }}</h3>
-                    <p class="text-muted">{{ $product->category->name }} • ${{ number_format($product->new_price, 2) }}</p>
-                    <p style="margin-top:12px">A high-performance sport bike with modern ergonomics and race-inspired
-                        handling. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
+                    <p class="text-muted">Category: {{ $product->category->name ?? $product->category_id }} • ${{ number_format($product->new_price, 2) }}</p>
+                    <p><strong>Slug:</strong> {{ $product->slug }}</p>
+                    <p><strong>Old Price:</strong> ${{ number_format($product->old_price, 2) }}</p>
+                    <p><strong>Brand:</strong> {{ $product->brand }}</p>
+                    <p><strong>Condition:</strong> {{ $product->condition }}</p>
+                    <p><strong>Model Name:</strong> {{ $product->model_name }}</p>
+                    <p><strong>Bike Type:</strong> {{ $product->bike_type }}</p>
+                    <p><strong>Launch Year:</strong> {{ $product->launch_year }}</p>
+                    <p><strong>No. of Cylinder:</strong> {{ $product->no_of_cylinder }}</p>
+                    <p><strong>Engine CC:</strong> {{ $product->engine_cc }}</p>
+                    <p><strong>Max Meter:</strong> {{ $product->max_meter }}</p>
+                    <p><strong>Max Torque:</strong> {{ $product->max_torque }}</p>
+                    <p><strong>No. of Gear:</strong> {{ $product->no_of_gear }}</p>
+                    <p><strong>Tank Capacity:</strong> {{ $product->tank_capacity }}</p>
+                    <p><strong>Milage:</strong> {{ $product->milage }}</p>
+                    <p><strong>Weight:</strong> {{ $product->weight }}</p>
+                    <p><strong>Break Type:</strong> {{ $product->break_type }}</p>
+                    <p><strong>Wheel Type:</strong> {{ $product->wheel_type }}</p>
+                    <p><strong>Tyre Type:</strong> {{ $product->tyre_type }}</p>
+                    <p><strong>Headlight:</strong> {{ $product->headlight }}</p>
+                    <p><strong>Colors:</strong> {{ $product->colors }}</p>
+                    <p><strong>Excerpt:</strong> {{ $product->excerpt }}</p>
+                    <p><strong>Description:</strong> {{ $product->description }}</p>
                     <div class="mt-3">
                         <a href="{{ route('dashboard.products') }}" class="btn btn-outline-secondary">Back to list</a>
                     </div>

@@ -66,6 +66,7 @@ class ProductController extends Controller
             'phone' => ['required', 'string'],
             'city' => ['required', 'string'],
             'address' => ['required', 'string'],
+
         ]);
         //  dd($product);
         $order = OrderConfirm::create([
