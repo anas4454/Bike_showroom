@@ -85,11 +85,11 @@
                                     <label class="form-check-label fw-bold">
                                         Credit / Debit Card
                                     </label>
-                                    <p class="small text-muted mb-2">
+                                    {{-- <p class="small text-muted mb-2">
                                         Visa, MasterCard accepted
-                                    </p>
+                                    </p> --}}
 
-                                    <!-- Card Details -->
+                                    {{-- <!-- Card Details -->
                                     <div class="row g-3">
                                         <div class="col-md-12">
                                             <input class="form-control" placeholder="Card Number">
@@ -101,9 +101,9 @@
                                             <input class="form-control" placeholder="CVV">
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
-                                <div class="form-check">
+                                {{-- <div class="form-check">
                                     <input class="form-check-input" type="radio" name="payment">
                                     <label class="form-check-label fw-bold">
                                         Bank Transfer
@@ -111,7 +111,7 @@
                                     <p class="small text-muted">
                                         Transfer payment directly to our bank account
                                     </p>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>
@@ -127,7 +127,7 @@
 
                                 <!-- Item -->
                                 <div class="d-flex align-items-center gap-3 mb-3">
-                                    <img src="{{ $product->images->first()->image_url }}" width="70"
+                                    {{-- <img src="{{ $product->images->first()->image_url }}" width="70" --}}
                                         class="rounded">
                                     <div>
                                         <h6 class="fw-bold mb-0">{{ $product->name }}</h6>

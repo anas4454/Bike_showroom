@@ -7,6 +7,8 @@ use App\Models\OrderConfirm;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
 
 class ProductController extends Controller
 {
@@ -84,5 +86,31 @@ class ProductController extends Controller
         ]);
 
         return redirect()->route('account', $order);
+    }
+
+    public function stripecheckout(Request $request, Product $product)
+    {
+
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        $session = Session::create([
+            'payment_method' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'usd',
+                    'product_data' => [
+                        'name' => $product->name,
+                    ],
+                    'unit_amount' => $product->new_price * 100,
+
+                ],
+                'quantity' => '1',
+            ]],
+            'mode'=>'payment',
+            'success_url'=>route('stripe.success').'?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url'=>route('stripe.cancel').'?session_id={CHECKOUT_SESSION_ID}',
+
+            ]);
+            dd($session);
     }
 }

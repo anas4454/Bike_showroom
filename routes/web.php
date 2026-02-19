@@ -38,7 +38,6 @@ Route::middleware('auth', 'verified', Userlogin::class)->prefix('dashboard')->gr
     Route::get('/orders', [Admin::class, 'adminOrderConfirm'])->name('dashboard.orders');
     Route::get('/orders/detail/{order}', [Admin::class, 'adminOrderdetail'])->name('dashboard.orders.detail');
     Route::POST('/dashboard/orders/{order}',[Admin::class, 'updateStatus'])->name('dashboard.orders.updateStatus');
-    
 
 
     //payments routes
@@ -48,6 +47,16 @@ Route::middleware('auth', 'verified', Userlogin::class)->prefix('dashboard')->gr
     Route::get('/users', [Admin::class, 'users'])->name('dashboard.users');
 });
 
+
+
+
+
+//Stripr Route
+
+Route::get('/stripe' , [ProductController::class, 'stripecheckout'])->name('stripe.checkout');
+Route::get('/stripe/session' , [ProductController::class, 'stripeSession'])->name('stripe.session');
+Route::get('/stripe/success' , [ProductController::class, 'stripeSuccess'])->name('stripe.success');
+Route::get('/stripe/cancel' , [ProductController::class, 'stripeCancel'])->name('stripe.cancel');
 
 
 
