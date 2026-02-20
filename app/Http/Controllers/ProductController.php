@@ -94,7 +94,7 @@ class ProductController extends Controller
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $session = Session::create([
-            'payment_method' => ['card'],
+            'payment_method_types' => ['card'],
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'usd',
@@ -104,13 +104,52 @@ class ProductController extends Controller
                     'unit_amount' => $product->new_price * 100,
 
                 ],
-                'quantity' => '1',
-            ]],
-            'mode'=>'payment',
-            'success_url'=>route('stripe.success').'?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url'=>route('stripe.cancel').'?session_id={CHECKOUT_SESSION_ID}',
+                'quantity' => 1,
 
+            ]],
+            'mode' => 'payment',
+
+            'metadata' => [
+                'product_id' => $product->id,
+                'product_slug' => $product->slug,
+            ],
+
+            'success_url' => route('stripe.success').'?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('stripe.cancel').'?session_id={CHECKOUT_SESSION_ID}',
+
+        ]);
+
+        return redirect()->away($session->url);
+
+    }
+
+    public function stripeSuccess(Request $request)
+    {
+
+        $session_id = $request->query('session_id');
+
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        $session = Session::retrieve($session_id);
+
+        if ($session->payment_status == 'paid') {
+            $order = OrderConfirm::create([
+                'oderid' => 'ORD'.time(),
+                'productId' => $session->metadata->product_id,
+                'total_price' => $session->amount_total / 100,
+                'name' => $session->customer_details->name,
+                'email' => $session->customer_details->email,
+                'phone' => $session->customer_details->phone,
+                'city' => '',
+                'address' => '',
+                'payment_method' => 'card',
+                'order_status' => 'pending',
+                'payment_status' => 'paid',
             ]);
-            dd($session);
+
+            return redirect()->route('account', $order);
+
+        }
+
     }
 }

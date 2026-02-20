@@ -12,6 +12,21 @@
 
             <div class="row g-4">
 
+
+                <div>
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                </div>
+
                 <!-- LEFT SIDEBAR -->
                 <div class="col-lg-3">
                     <div class="card shadow-sm border-0">
@@ -32,7 +47,7 @@
                 <div class="col-lg-9">
 
                     <!-- USER INFORMATION -->
-                    <div class="card shadow-sm border-0 mb-4">
+                    {{-- <div class="card shadow-sm border-0 mb-4">
                         <div class="card-body">
                             <h5 class="fw-bold mb-3">User Information</h5>
 
@@ -47,7 +62,7 @@
                                     <strong>Phone:</strong> {{ $order->phone }}
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <strong>City:</strong> {{ $order->city}}
+                                    <strong>City:</strong> {{ $order->city }}
                                 </div>
                                 <div class="col-12">
                                     <strong>Shipping Address:</strong><br>
@@ -55,7 +70,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <!-- ORDER TRACKING -->
                     <div class="card shadow-sm border-0 mb-4">
@@ -110,28 +125,29 @@
                                     </thead>
                                     <tbody>
 
-                                        @if($order)
-                                        <tr>
-                                            <td>{{ $order->oderid }}</td>
-                                            <td>
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <img src="{{ optional($order->product->images->first())->image_url ?? 'https://via.placeholder.com/60' }}"
-                                                        width="60" class="rounded">
-                                                    <span>{{ $order->product->name}}</span>
-                                                </div>
-                                            </td>
-                                            <td>${{ number_format($order->total_price, 2) }}</td>
-                                            <td>
-                                                <span class="badge {{ $order->order_status === 'delivered' ? 'bg-success' : ($order->order_status === 'shipped' ? 'bg-warning text-dark' : 'bg-secondary text-light') }}">{{ ucfirst($order->order_status ?? 'pending') }}</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-outline-dark btn-sm">View</a>
-                                            </td>
-                                        </tr>
-                                        @else
-                                        <tr>
-                                            <td colspan="5" class="text-center text-muted">No orders found.</td>
-                                        </tr>
+                                        {{-- @if ($order)
+                                            <tr>
+                                                <td>{{ $order->oderid }}</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <img src="{{ optional($order->product->images->first())->image_url ?? 'https://via.placeholder.com/60' }}"
+                                                            width="60" class="rounded">
+                                                        <span>{{ $order->product->name }}</span>
+                                                    </div>
+                                                </td>
+                                                <td>${{ number_format($order->total_price, 2) }}</td>
+                                                <td>
+                                                    <span
+                                                        class="badge {{ $order->order_status === 'delivered' ? 'bg-success' : ($order->order_status === 'shipped' ? 'bg-warning text-dark' : 'bg-secondary text-light') }}">{{ ucfirst($order->order_status ?? 'pending') }}</span>
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="btn btn-outline-dark btn-sm">View</a>
+                                                </td>
+                                            </tr>
+                                        @else --}}
+                                            <tr>
+                                                <td colspan="5" class="text-center text-muted">No orders found.</td>
+                                            </tr>
                                         @endif
 
                                     </tbody>
